@@ -1,0 +1,44 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Use this derive macro on an enum to easily generate a choice parameter type. A choice parameter is mainly useful in slash commands. It allows you to constrain input to a fixed set of choices."><title>ChoiceParameter in poise::macros - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-aa0817cf.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="poise" data-themes="" data-resource-suffix="" data-rustdoc-version="1.90.0-nightly (a2d45f73c 2025-07-07)" data-channel="nightly" data-search-js="search-179e01a3.js" data-settings-js="settings-5514c975.js" ><script src="../../static.files/storage-4e99c027.js"></script><script defer src="sidebar-items.js"></script><script defer src="../../static.files/main-673ee1e0.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-32bb7600.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"></head><body class="rustdoc derive"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../poise/index.html">poise</a><span class="version">0.6.1</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">Choice<wbr>Parameter</a></h2><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#localization" title="Localization">Localization</a></li></ul></section><div id="rustdoc-modnav"><h2><a href="index.html">In poise::<wbr>macros</a></h2></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="../index.html">poise</a>::<wbr><a href="index.html">macros</a></div><h1>Derive Macro <span class="derive">ChoiceParameter</span><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../../src/poise_macros/lib.rs.html#251">Source</a> </span></div><pre class="rust item-decl"><code>#[derive(ChoiceParameter)]
+{
+    <span class="comment">// Attributes available to this derive:</span>
+    #[name]
+    #[name_localized]
+}
+</code></pre><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Use this derive macro on an enum to easily generate a choice parameter type. A choice parameter
+is mainly useful in slash commands. It allows you to constrain input to a fixed set of choices.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[derive(poise::ChoiceParameter)]
+</span><span class="kw">pub enum </span>MyChoice {
+    <span class="attr">#[name = <span class="string">"The first choice"</span>]
+    </span>ChoiceA,
+    <span class="comment">// A choice can have multiple names
+    </span><span class="attr">#[name = <span class="string">"The second choice"</span>]
+    #[name = <span class="string">"ChoiceB"</span>]
+    </span>ChoiceB,
+    <span class="comment">// Or no name, in which case it falls back to the variant name "ChoiceC"
+    </span>ChoiceC,
+}</code></pre></div>
+<p>Example invocations:</p>
+<ul>
+<li><code>~yourcommand "The first choice"</code> - without the quotes, each word would count as a separate argument</li>
+<li><code>~yourcommand ChoiceB</code></li>
+<li><code>~yourcommand cHoIcEb</code> - names are case-insensitive</li>
+</ul>
+<h2 id="localization"><a class="doc-anchor" href="#localization">§</a>Localization</h2>
+<p>In slash commands, you can take advantage of Discord’s localization.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[derive(poise::ChoiceParameter)]
+</span><span class="kw">pub enum </span>Food {
+    <span class="attr">#[name_localized(<span class="string">"de"</span>, <span class="string">"Eier"</span>)]
+    #[name_localized(<span class="string">"es-ES"</span>, <span class="string">"Huevos"</span>)]
+    </span>Eggs,
+    <span class="attr">#[name_localized(<span class="string">"de"</span>, <span class="string">"Pizza"</span>)]
+    #[name_localized(<span class="string">"es-ES"</span>, <span class="string">"Pizza"</span>)]
+    </span>Pizza,
+    <span class="attr">#[name_localized(<span class="string">"de"</span>, <span class="string">"Müsli"</span>)]
+    #[name_localized(<span class="string">"es-ES"</span>, <span class="string">"Muesli"</span>)]
+    </span>Cereals,
+}</code></pre></div>
+<p>When invoking your slash command, users will be shown the name matching their locale.</p>
+<p>You can also set localized choice names programmatically; see <code>CommandParameter::choices</code></p>
+</div></details></section></div></main></body></html>
