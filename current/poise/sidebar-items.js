@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["builtins","choice_parameter","cooldown","dispatch","framework","macros","modal","prefix_argument","reply","samples","serenity_prelude","slash_argument","structs","track_edits"],"type":["BoxFuture"]};

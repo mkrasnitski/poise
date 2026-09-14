@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":["CodeBlock","CodeBlockError","InvalidBool","InvalidChannelId","InvalidChoice","InvalidRoleId","InvalidUserId","KeyValueArgs","MissingAttachment","TooFewArguments","TooManyArguments"],"trait":["PopArgument"]};
